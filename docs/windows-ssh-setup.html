@@ -27,7 +27,7 @@ then looking for OpenSSH Client in the list.</p>
 <h1>3. Add key to ssh-agent</h1>
 <p>The ssh agent is used to manage ssh keys, first the service must be started. Open an admin Terminal, Command Prompt or PowerShell and
 enter the commands <code>Get-Service ssh-agent | Select StartType</code> if it doesn't say Automatic enter 
-<code>Set-Service ssh-agent -StartupType Automatic</code>
+<code>Get-Service ssh-agent | Set-Service -StartupType Automatic</code>
 <br>Now add the private key to the ssh-agent with the command <code>ssh-add ~/.ssh/id_ed25519</code> If you created the key with a passcode you will have to enter it now.
 Delete the private key file.</p>
 <h1>4. Add the public key to Github</h1>
@@ -37,6 +37,11 @@ Delete the private key file.</p>
 <p>We now need to check that adding the key has worked and will allow you to authenticate with Github.<br>
 This is essentially the instructions here: <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection" target="_blank">Testing your SSH connection</a><br>
 Open a Terminal, Command Prompt or PowerShell and enter the command <code>ssh -T git@github.com</code> If this is the first time you are doing this you will 
-see a warning, type yes. You should then see a message saying that you have authenticated.
+see a warning, type yes. You should then see a message saying that you have authenticated.</p>
+<h1>Install Git</h1>
+<p>Enter the command <code>winget install Git.Git</code> Git should now be installed.<br>
+We now need to tell Git to use Windows build in OpenSSH, rather then the SSH client included with the Git install. Enter the command in a terminal <code>
+git config --global core.sshcommand C:/Windows/System32/OpenSSH/ssh.exe</code><br>
+You should now be able to clone Git repositories from Github using SSH on windows.</p> 
 </body>
 </html>
